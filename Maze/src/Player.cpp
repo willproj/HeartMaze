@@ -2,6 +2,11 @@
 
 namespace maze
 {
+	int32_t Player::m_PosX = 0;
+	int32_t Player::m_PosY = 0;
+
+	glm::mat4 Player::m_ModelMatrix = glm::mat4(1.0f);
+
 	Player::Player()
 	{
 		m_PlayerShader = std::shared_ptr<renderer::Shader>(new renderer::Shader("shader/vertexShader.vert", "shader/player.frag"));
@@ -13,41 +18,60 @@ namespace maze
 	}
 
 
-	void Player::DrawPlayer(const glm::mat4& model, const glm::mat4& view, const glm::mat4& projection,std::function<void()> func)
+	void Player::DrawPlayer(const glm::mat4& view, const glm::mat4& projection,std::function<void()> func)
 	{
 		m_PlayerShader->BindShaderProgram();
 		m_PlayerShader->BindShaderProgram();
 		m_PlayerShader->SetMat4("u_projection", projection);
 		m_PlayerShader->SetMat4("u_view", view);
-		m_PlayerShader->SetMat4("u_model", model);
+		m_PlayerShader->SetMat4("u_model", m_ModelMatrix);
 		func();
 		m_PlayerShader->UnbindShaderProgram();
 	}
 
-	void Player::processInput(glm::mat4& model,GLFWwindow* window)
+	void Player::KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 	{
-		if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+		switch (action)
 		{
-			model = glm::translate(model, glm::vec3(0.0f, 1.0f, 0.0f));
-
-			std::cout << "up" << std::endl;
+		case GLFW_PRESS:
+			TranslateModel(key);
+			break;
+		case GLFW_RELEASE:
+			break;
+		case GLFW_REPEAT:
+			TranslateModel(key);
+			break;
 		}
-		else if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		{
-			model = glm::translate(model, glm::vec3(0.0f, -1.0f, 0.0f));
+	}
 
-			std::cout << "down" << std::endl;
-		}
-		else if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+	void Player::TranslateModel(int& key)
+	{
+		if (key == GLFW_KEY_UP)
 		{
-			model = glm::translate(model, glm::vec3(-1.0f, 0.0f, 0.0f));
+			Player::m_ModelMatrix = glm::translate(Player::m_ModelMatrix, glm::vec3(0.0f, 1.0f, 0.0f));
+			Player::m_PosY++;
+			std::cout << "pos:" << Player::m_PosX << " " << Player::m_PosY << std::endl;
+		}
+		else if (key == GLFW_KEY_DOWN)
+		{
+			Player::m_ModelMatrix = glm::translate(Player::m_ModelMatrix, glm::vec3(0.0f, -1.0f, 0.0f));
+			Player::m_PosY--;
+			std::cout << "pos:" << Player::m_PosX << " " << Player::m_PosY << std::endl;
 
-			std::cout << "left" << std::endl;
 		}
-		else if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+		else if (key == GLFW_KEY_LEFT)
 		{
-			model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
-			std::cout << "right" << std::endl;
+			Player::m_ModelMatrix = glm::translate(Player::m_ModelMatrix, glm::vec3(-1.0f, 0.0f, 0.0f));
+			Player::m_PosX--;
+			std::cout << "pos:" << Player::m_PosX << " " << Player::m_PosY << std::endl;
+
+		}
+		else if (key == GLFW_KEY_RIGHT)
+		{
+			Player::m_ModelMatrix = glm::translate(Player::m_ModelMatrix, glm::vec3(1.0f, 0.0f, 0.0f));
+			Player::m_PosX++;
+			std::cout << "pos:" << Player::m_PosX << " " << Player::m_PosY << std::endl;
+
 		}
 	}
 

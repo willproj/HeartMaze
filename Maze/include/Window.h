@@ -21,6 +21,8 @@ namespace maze
 		const float GetAspect() const { return static_cast<float>(s_WindowWidth) / static_cast<float>(s_WindowHeight); }
 		GLFWwindow* GetWinPtr() { return m_Window; }
 
+		void SetPlayerKeyCallback(void (*f)(GLFWwindow* window, int key, int scancode, int action, int mods));
+
 	private:
 		Window();
 		static Window s_Instance;

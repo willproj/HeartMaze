@@ -4,12 +4,12 @@
 namespace maze
 {
 
-
 	Application::Application()
 		:m_Win(Window::Get())
 	{
 		m_WallShader = std::shared_ptr<renderer::Shader>(new renderer::Shader("shader/vertexShader.vert", "shader/fragmentShader.frag"));
 		m_Maze = std::shared_ptr<Maze>(new Maze());
+		m_Win.SetPlayerKeyCallback(Player::KeyCallback);
 		
 	}
 
@@ -17,12 +17,10 @@ namespace maze
 	{
 
 		glm::mat4 model = glm::mat4(1.0f);
-		glm::mat4 modelPlayer = glm::mat4(1.0f);
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projection = glm::mat4(1.0f);
 
 		view = glm::translate(view, glm::vec3(0.0f, -3.0f, -50.0f));
-
 
 		while (m_Win.Closed())
 		{
@@ -49,8 +47,7 @@ namespace maze
 
 
 			//player
-			player.processInput(modelPlayer, m_Win.GetWinPtr());
-			player.DrawPlayer(modelPlayer, view, projection, [=]() {m_Quad.Draw(); });
+			player.DrawPlayer(view, projection, [=]() {m_Quad.Draw(); });
 			
 
 

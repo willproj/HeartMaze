@@ -42,6 +42,10 @@ namespace maze
 		return s_Instance;
 	}
 
+	void Window::SetPlayerKeyCallback(void (*f)(GLFWwindow* window,int key,int scancode,int action,int mods))
+	{
+		glfwSetKeyCallback(m_Window, f);
+	}
 
 	bool Window::InitWindow()
 	{
@@ -61,6 +65,7 @@ namespace maze
 		}
 
 		glfwMakeContextCurrent(m_Window);
+	
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		{

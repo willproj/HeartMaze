@@ -1,4 +1,4 @@
-#include "Application.h"
+﻿#include "Application.h"
 
 
 int main()
@@ -7,5 +7,8 @@ int main()
     maze::Application app;
     app.Run();
 
+
     return 0;
 }
+
+
