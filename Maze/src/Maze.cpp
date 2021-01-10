@@ -42,9 +42,9 @@ namespace maze
 	{
 		float leftVal = 0, rightVal = 0;
 
-		for (int32_t i = -m_MazeAreaX; i < m_MazeAreaX; i++)
+		for (int32_t i = -MAZE_AREAX; i < MAZE_AREAX; i++)
 		{
-			for (int32_t j = -m_MazeAreaY; j < m_MazeAreaY; j++)
+			for (int32_t j = -MAZE_AREAY; j < MAZE_AREAY; j++)
 			{
 				leftVal = calculateLeft(i, j);
 				rightVal = calculateRight(i, j);
@@ -105,6 +105,17 @@ namespace maze
 			}
 			m_WallsVec.erase(m_WallsVec.begin() + randnum);
 		}
+
+		//generate a door
+		for (auto p : m_DoorGenerator)
+		{
+			if (m_WallsMap[{p.first - 1, p.second}] == NOT_WALL)
+			{
+				m_WallsMap[{p.first, p.second}] = NOT_WALL;
+				break;
+			}
+		}
+
 	}
 
 
@@ -161,6 +172,15 @@ namespace maze
 						}
 					}
 				}
+			}
+		}
+
+		//area of door which may generated
+		for (auto it = m_Enclosure.begin(); it != m_Enclosure.end(); it++)
+		{
+			if (it->first >= 14 && it->first <= 18 && it->second >= -3 && it->second <= 13)
+			{
+				m_DoorGenerator.push_back({ it->first, it->second });
 			}
 		}
 

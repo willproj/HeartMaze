@@ -20,8 +20,6 @@
 #include <functional>
 
 
-
-
 #define WALL 1
 #define NOT_WALL -1
 
@@ -30,8 +28,8 @@
 #define LEFT 4
 #define UP 8
 
-const int32_t m_MazeAreaX = 22;
-const int32_t m_MazeAreaY = 22;
+const int32_t MAZE_AREAX = 22;
+const int32_t MAZE_AREAY = 22;
 
 struct pair_hash
 {

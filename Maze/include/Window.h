@@ -16,7 +16,7 @@ namespace maze
 		void Update();
 
 		const int32_t GetWindowWidth() const { return s_WindowWidth; }
-		const int32_t GetWindowHeight()const { return s_WindowHeight; }
+		const int32_t GetWindowHeight() const { return s_WindowHeight; }
 
 		const float GetAspect() const { return static_cast<float>(s_WindowWidth) / static_cast<float>(s_WindowHeight); }
 		GLFWwindow* GetWinPtr() { return m_Window; }

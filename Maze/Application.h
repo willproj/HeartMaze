@@ -1,8 +1,10 @@
 #pragma once
-#include "include/Window.h"
-#include "include/renderer/RenderQuad.h"
+#include "Window.h"
+#include "renderer/Texture.h"
+#include "renderer/RenderQuad.h"
 #include "Maze.h"
-#include "include/Player.h"
+#include "Player.h"
+#include "Camera.h"
 
 
 namespace maze
@@ -13,13 +15,21 @@ namespace maze
 	public:
 		Application();
 		void Run();
-		std::shared_ptr<Maze> m_Maze;
-		Player player;
 		
 	private:
+		std::shared_ptr<Maze> m_Maze;
+		Player player;
 		Window& m_Win;
+
+		GLuint m_TexWall;
+		GLuint m_TexLand;
+		GLuint m_TexPlayer;
+		GLuint m_TexRock;
+
+	
+
 		renderer::Quad m_Quad;
 
-		std::shared_ptr<renderer::Shader> m_WallShader;
+		std::shared_ptr<renderer::Shader> m_Shader;
 	};
 }

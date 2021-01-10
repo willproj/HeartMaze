@@ -1,4 +1,3 @@
-
 #include "renderer/Shader.h"
 
 namespace maze::renderer

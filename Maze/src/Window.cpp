@@ -22,7 +22,7 @@ namespace maze
 
 	void Window::Clear() const
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 	}
 
@@ -56,7 +56,6 @@ namespace maze
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); //fixed size of window
 
 		m_Window = glfwCreateWindow(s_WindowWidth, s_WindowHeight, "maze", nullptr, nullptr);
 		if (!m_Window)
@@ -65,6 +64,11 @@ namespace maze
 		}
 
 		glfwMakeContextCurrent(m_Window);
+
+		glfwSetFramebufferSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) 
+		{
+			glViewport(0, 0, width, height);
+		});
 	
 
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -73,6 +77,7 @@ namespace maze
 			return false;
 		}
 
+		glEnable(GL_DEPTH_TEST);
 		return true;
 	}
 

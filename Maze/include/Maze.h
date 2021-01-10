@@ -27,13 +27,13 @@ namespace maze
 		std::unordered_set<std::pair<int32_t, int32_t>, pair_hash> m_Enclosure;
 		std::unordered_map<std::pair<int32_t, int32_t>, int32_t, pair_hash> m_WallsMap;
 		std::unordered_set<std::pair<int32_t, int32_t>, pair_hash> GetEnclosure() { return m_Enclosure; }
-
+		std::vector<std::pair<int32_t,int32_t>> m_DoorGenerator;
 	public:
 		
 		Maze();
 		~Maze();
 
-		std::unordered_map<std::pair<int32_t, int32_t>, int32_t, pair_hash>& GetWallCoordMap() { return m_WallsMap; }
+		std::unordered_map<std::pair<int32_t, int32_t>, int32_t, pair_hash>& GetWallCoordMapRef() { return m_WallsMap; }
 		
 	private:
 		void findWall();
