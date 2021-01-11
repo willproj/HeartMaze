@@ -6,6 +6,6 @@ This is a heart-shaped maze built by C++ and OpenGL,the maze can be generated ra
 
 ## ScreenShots
 
-<div align=center><img src="https://github.com/willproj/HeartMaze/tree/main/ScreenShot/screenshot1.png" width= "700" height="430"></div>
+<div align=center><img src="https://github.com/willproj/HeartMaze/blob/main/ScreenShot/screenshot1.png" width= "700" height="430"></div>
 
-<div align=center><img src="https://github.com/willproj/HeartMaze/tree/main/ScreenShot/screenshot2.png" width= "700" height="430"></div>
+<div align=center><img src="https://github.com/willproj/HeartMaze/blob/main/ScreenShot/screenshot2.png" width= "700" height="430"></div>
